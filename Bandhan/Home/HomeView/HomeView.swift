@@ -8,37 +8,39 @@
 import SwiftUI
 
 struct HomeView: View {
-    enum FilterOption {
-        case all, handpicked
-    }
     
-    @State private var selectedFilter: FilterOption = .all
+    @Binding var showUserProfile: Bool
     
     var body: some View {
         NavigationStack{
-            // MARK: - Top Section
-            HeaderView()
-                .padding(.horizontal)
-            
-            // MARK: - Filter View
-            FilterView()
-                .padding(.horizontal)
-            
-            // MARK: - Profile Scroll Section
-            VStack{
-                ScrollView {
-                    LazyVStack {
-                        ForEach(0..<10) { index in
-                            ProfileCard()
-                                .containerRelativeFrame(.vertical)
-                                .id(index)
+            ZStack(alignment: .leading){
+                VStack{
+                    // MARK: - Top Section
+                    HeaderView(showUserProfile: $showUserProfile)
+                        .padding(.horizontal)
+                    Divider()
+                    // MARK: - Filter View
+                    FilterView()
+                        .padding(.horizontal)
+                    
+                    // MARK: - Profile Scroll Section
+                    VStack{
+                        ScrollView {
+                            LazyVStack {
+                                ForEach(0..<10) { index in
+                                    ProfileCard()
+                                        .containerRelativeFrame(.vertical)
+                                        .id(index)
+                                }
+                            }
+                            .scrollTargetLayout()
                         }
+                        .scrollTargetBehavior(.viewAligned)
+                        .scrollIndicators(.hidden)
+                        .padding()
                     }
-                    .scrollTargetLayout()
                 }
-                .scrollTargetBehavior(.viewAligned)
-                .scrollIndicators(.hidden)
-                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
     }
@@ -46,6 +48,6 @@ struct HomeView: View {
 
 #Preview {
     NavigationStack{
-        HomeView()
+        HomeView(showUserProfile: .constant(false))
     }
 }

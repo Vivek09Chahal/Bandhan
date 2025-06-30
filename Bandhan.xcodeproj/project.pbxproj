@@ -11,6 +11,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		0C1A2D082E13187900C542B5 /* New Folder */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "New Folder";
+			sourceTree = "<group>";
+		};
 		0C8A54CF2DFC344300F680A0 /* Bandhan */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Bandhan;
@@ -34,6 +39,7 @@
 			children = (
 				0C8A54CF2DFC344300F680A0 /* Bandhan */,
 				0C8A54CE2DFC344300F680A0 /* Products */,
+				0C1A2D082E13187900C542B5 /* New Folder */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +67,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				0C1A2D082E13187900C542B5 /* New Folder */,
 				0C8A54CF2DFC344300F680A0 /* Bandhan */,
 			);
 			name = Bandhan;

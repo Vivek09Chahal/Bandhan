@@ -69,7 +69,7 @@ struct FilterButton: View {
             action()
         } label: {
             HStack {
-                if let icon = icon {
+                if let icon = icon {  
                     Image(systemName: icon)
                         .font(.system(size: 14))
                 }

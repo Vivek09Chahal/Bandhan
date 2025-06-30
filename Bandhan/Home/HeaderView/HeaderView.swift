@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HeaderView: View {
+    
+    @Binding var showUserProfile: Bool
+    
     var body: some View {
         HStack(alignment: .top){
             Image("profilePic")
@@ -15,10 +18,15 @@ struct HeaderView: View {
                 .frame(width: 50, height: 50)
                 .scaledToFit()
                 .clipShape(Circle())
+                .onTapGesture {
+                    showUserProfile.toggle()
+                }
             VStack(alignment: .leading){
                 Text("My Matches")
+                    .font(.title2)
+                    .fontWeight(.bold)
                 Text("as per partner preference")
-                    .font(.caption)
+                    .font(.subheadline)
             }
             Spacer()
             HStack{
@@ -36,5 +44,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView()
+    HeaderView(showUserProfile: .constant(true))
 }
