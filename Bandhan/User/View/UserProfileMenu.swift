@@ -15,14 +15,20 @@ struct UserProfileMenu: View {
         VStack(alignment: .leading, spacing: 20){
             // User Profile Image and Name
             VStack(spacing: 10) {
+                
+                // User profile Pic edit option still left
                 Image("profilePic")
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
                     .frame(width: 80, height: 80)
+                
+                // User Name
                 Text("Vivek")
                     .font(.title2)
                     .fontWeight(.bold)
+                
+                
                 Text("@vivek_profile")
                     .font(.subheadline)
                     .foregroundColor(.gray)
@@ -48,7 +54,7 @@ struct UserProfileMenu: View {
             
             Divider()
             
-            // Menu Options
+            // MARK: - Navigation Menu Options
             VStack(alignment: .leading, spacing: 25) {
                 menuItem(icon: "person", text: "Profile")
                 menuItem(icon: "bookmark", text: "Saved Matches")
@@ -63,7 +69,7 @@ struct UserProfileMenu: View {
             
             Divider()
             
-            // Logout Button
+            // MARK: - Logout Button
             Button(action: {
                 // Logout action
             }) {

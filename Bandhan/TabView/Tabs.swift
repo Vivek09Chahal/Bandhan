@@ -41,6 +41,8 @@ struct Tabs: View {
                     }
             )
             
+            
+            // MARK: - User Profile Menu
             UserProfileMenu()
                 .frame(width: 300)
                 .offset(x: showUserProfile ? 0 : -300)

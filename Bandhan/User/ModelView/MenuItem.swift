@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: - will use cases to navigate through Profile Menu Items
 enum UserMenu: String, Identifiable, CaseIterable, Equatable {
     var id: String { rawValue }
     case profile = "Profile"
@@ -38,7 +39,7 @@ enum UserMenu: String, Identifiable, CaseIterable, Equatable {
 }
 
 
-
+// default View for now
 struct ProfileView: View { var body: some View { Text("👤 Profile View").font(.largeTitle) } }
 struct SavedMatchesView: View { var body: some View { Text("💾 Saved Matches").font(.largeTitle) } }
 struct NotificationsView: View { var body: some View { Text("🔔 Notifications").font(.largeTitle) } }

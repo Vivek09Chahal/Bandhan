@@ -13,6 +13,7 @@ struct HeaderView: View {
     
     var body: some View {
         HStack(alignment: .top){
+            // user proile pic
             Image("profilePic")
                 .resizable()
                 .frame(width: 50, height: 50)
@@ -21,6 +22,8 @@ struct HeaderView: View {
                 .onTapGesture {
                     showUserProfile.toggle()
                 }
+            
+            // headline
             VStack(alignment: .leading){
                 Text("My Matches")
                     .font(.title2)
@@ -29,6 +32,8 @@ struct HeaderView: View {
                     .font(.subheadline)
             }
             Spacer()
+            
+            // Notification, Search
             HStack{
                 Image(systemName: "bell")
                     .resizable()
