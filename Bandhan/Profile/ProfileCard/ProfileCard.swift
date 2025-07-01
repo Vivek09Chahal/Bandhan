@@ -8,35 +8,45 @@
 import SwiftUI
 
 struct ProfileCard: View {
+    
+    var profile: ProfilesData
+    
     var body: some View {
         ZStack(){
             
             // MARK: - Image
-            Image("profile")
-                .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .overlay(
-                    ZStack {
-                        // Gradient overlay
-                        LinearGradient(
-                            colors: [.clear, .black],
-                            startPoint: .center,
-                            endPoint: .bottom
+            AsyncImage(url: URL(string: profile.profilePicture)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/1.6)
+            } placeholder: {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                ZStack {
+                    // Gradient overlay
+                    LinearGradient(
+                        colors: [.clear, .black],
+                        startPoint: .center,
+                        endPoint: .bottom
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    
+                    // Border stroke
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(
+                            LinearGradient(
+                                colors: [.red, .orange, .pink],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 2
                         )
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        
-                        // Border stroke
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [.red, .orange, .pink],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 2
-                            )
-                    }
-                )
+                }
+            )
             
             // MARK: - top Section
             VStack(alignment: .leading){
@@ -64,11 +74,11 @@ struct ProfileCard: View {
                 
                 // MARK: - Details
                 VStack(alignment: .leading){
-                    details(info1: "Moana", info2: "27") // name, age
+                    details(info1: profile.name, info2: "\(profile.age)") // name, age
                         .font(.title)
-                    details(info1: "5,3", info2: "• Disney, Animation") // Height, Destination, Cast
-                    details(info1: "Product Designer", info2: "• Earns $100k/yr")
-                    details(info1: "B.Tech")
+                    details(info1: profile.height, info2: profile.location + profile.caste) // Height, Destination, Cast
+                    details(info1: profile.profession, info2: profile.income)
+                    details(info1: profile.education)
                     details(info1: "Profile Manager by Herself") // Profile Manager By Whom
                         .padding(.horizontal)
                         .padding(.vertical, 8)
@@ -129,5 +139,5 @@ extension ProfileCard {
 }
 
 #Preview {
-    ProfileCard()
+    ProfileCard(profile: ProfilesData.sampleProfile)
 }

@@ -81,4 +81,5 @@ struct Tabs: View {
 
 #Preview {
     Tabs()
+        .environment(DataFetch())
 }

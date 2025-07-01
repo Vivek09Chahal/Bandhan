@@ -1,0 +1,412 @@
+[
+  {
+    "id": "U1001",
+    "name": "Ananya Sharma",
+    "gender": "Female",
+    "age": 28,
+    "height": "5'5\"",
+    "maritalStatus": "Never Married",
+    "religion": "Hindu",
+    "caste": "Brahmin",
+    "manglik": "No",
+    "motherTongue": "Hindi",
+    "education": "MBA, IIM Bangalore",
+    "profession": "Marketing Manager",
+    "income": "₹15 LPA",
+    "location": "Bangalore, India",
+    "country": "India",
+    "diet": "Vegetarian",
+    "smoking": "No",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "Retired Banker",
+      "motherOccupation": "Homemaker",
+      "siblings": {
+        "brothers": 1,
+        "sisters": 0
+      },
+      "familyType": "Nuclear",
+      "familyStatus": "Upper Middle Class",
+      "familyValues": "Traditional"
+    },
+    "partnerPreferences": {
+      "ageRange": "28-32",
+      "heightRange": "5'7\" - 6'1\"",
+      "religion": "Hindu",
+      "caste": "Brahmin",
+      "education": "MBA or higher",
+      "location": "India",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/f3/f9/72/f3f97206e7ebe65a81178b8b444127a8.jpg"
+  },
+  {
+    "id": "U1002",
+    "name": "Rahul Verma",
+    "gender": "Male",
+    "age": 30,
+    "height": "5'10\"",
+    "maritalStatus": "Never Married",
+    "religion": "Hindu",
+    "caste": "Kshatriya",
+    "manglik": "Yes",
+    "motherTongue": "Hindi",
+    "education": "M.Tech, IIT Delhi",
+    "profession": "Software Engineer",
+    "income": "₹22 LPA",
+    "location": "Pune, India",
+    "country": "India",
+    "diet": "Non-Vegetarian",
+    "smoking": "No",
+    "drinking": "Occasionally",
+    "family": {
+      "fatherOccupation": "Businessman",
+      "motherOccupation": "Teacher",
+      "siblings": {
+        "brothers": 0,
+        "sisters": 1
+      },
+      "familyType": "Joint",
+      "familyStatus": "Affluent",
+      "familyValues": "Moderate"
+    },
+    "partnerPreferences": {
+      "ageRange": "25-30",
+      "heightRange": "5'3\" - 5'7\"",
+      "religion": "Hindu",
+      "caste": "Any",
+      "education": "Graduate and above",
+      "location": "Maharashtra",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/0a/92/c1/0a92c1025d47970e0bde57ff86c0d2fa.jpg"
+  },
+  {
+    "id": "U1003",
+    "name": "Fatima Sheikh",
+    "gender": "Female",
+    "age": 27,
+    "height": "5'3\"",
+    "maritalStatus": "Never Married",
+    "religion": "Muslim",
+    "caste": "Sunni",
+    "manglik": "No",
+    "motherTongue": "Urdu",
+    "education": "BDS, Mumbai University",
+    "profession": "Dentist",
+    "income": "₹10 LPA",
+    "location": "Mumbai, India",
+    "country": "India",
+    "diet": "Halal",
+    "smoking": "No",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "Doctor",
+      "motherOccupation": "Homemaker",
+      "siblings": {
+        "brothers": 1,
+        "sisters": 1
+      },
+      "familyType": "Nuclear",
+      "familyStatus": "Upper Middle Class",
+      "familyValues": "Conservative"
+    },
+    "partnerPreferences": {
+      "ageRange": "28-32",
+      "heightRange": "5'8\" - 6'0\"",
+      "religion": "Muslim",
+      "caste": "Sunni",
+      "education": "Professional Degree",
+      "location": "India or Abroad",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/c5/d3/c8/c5d3c8482e1bc73bd95f2535553977ce.jpg"
+  },
+  {
+    "id": "U1004",
+    "name": "Aman Khan",
+    "gender": "Male",
+    "age": 31,
+    "height": "6'0\"",
+    "maritalStatus": "Divorced",
+    "religion": "Muslim",
+    "caste": "Sunni",
+    "manglik": "No",
+    "motherTongue": "Urdu",
+    "education": "MBA, ISB Hyderabad",
+    "profession": "Financial Analyst",
+    "income": "₹30 LPA",
+    "location": "Hyderabad, India",
+    "country": "India",
+    "diet": "Halal",
+    "smoking": "Occasionally",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "Businessman",
+      "motherOccupation": "Doctor",
+      "siblings": {
+        "brothers": 0,
+        "sisters": 2
+      },
+      "familyType": "Joint",
+      "familyStatus": "Rich",
+      "familyValues": "Moderate"
+    },
+    "partnerPreferences": {
+      "ageRange": "27-31",
+      "heightRange": "5'4\" - 5'8\"",
+      "religion": "Muslim",
+      "caste": "Any",
+      "education": "Any",
+      "location": "India",
+      "maritalStatus": "Divorced or Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/8c/71/65/8c7165afa4e967a2ed6bd4d345e13eac.jpg"
+  },
+  {
+    "id": "U1005",
+    "name": "Simran Kaur",
+    "gender": "Female",
+    "age": 26,
+    "height": "5'6\"",
+    "maritalStatus": "Never Married",
+    "religion": "Sikh",
+    "caste": "Jat",
+    "manglik": "Don't Know",
+    "motherTongue": "Punjabi",
+    "education": "B.Tech, Chandigarh University",
+    "profession": "UX Designer",
+    "income": "₹12 LPA",
+    "location": "Chandigarh, India",
+    "country": "India",
+    "diet": "Vegetarian",
+    "smoking": "No",
+    "drinking": "Occasionally",
+    "family": {
+      "fatherOccupation": "Engineer",
+      "motherOccupation": "Teacher",
+      "siblings": {
+        "brothers": 1,
+        "sisters": 0
+      },
+      "familyType": "Nuclear",
+      "familyStatus": "Middle Class",
+      "familyValues": "Modern"
+    },
+    "partnerPreferences": {
+      "ageRange": "27-30",
+      "heightRange": "5'7\" - 6'1\"",
+      "religion": "Sikh or Hindu",
+      "caste": "Jat",
+      "education": "Engineering or Design",
+      "location": "North India",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/4e/b2/bc/4eb2bc3a7234950bef10001272f5688f.jpg"
+  },
+  {
+    "id": "U1006",
+    "name": "Karan Mehta",
+    "gender": "Male",
+    "age": 29,
+    "height": "5'9\"",
+    "maritalStatus": "Never Married",
+    "religion": "Jain",
+    "caste": "Shwetambar",
+    "manglik": "No",
+    "motherTongue": "Gujarati",
+    "education": "CA, ICAI",
+    "profession": "Chartered Accountant",
+    "income": "₹18 LPA",
+    "location": "Ahmedabad, India",
+    "country": "India",
+    "diet": "Vegetarian",
+    "smoking": "No",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "CA",
+      "motherOccupation": "Homemaker",
+      "siblings": {
+        "brothers": 1,
+        "sisters": 1
+      },
+      "familyType": "Joint",
+      "familyStatus": "Upper Middle Class",
+      "familyValues": "Traditional"
+    },
+    "partnerPreferences": {
+      "ageRange": "25-28",
+      "heightRange": "5'2\" - 5'6\"",
+      "religion": "Jain",
+      "caste": "Any",
+      "education": "Graduate",
+      "location": "Gujarat",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/bb/a8/ee/bba8eef1c68560da41f38f528c50d91a.jpg"
+  },
+  {
+    "id": "U1007",
+    "name": "Priya Iyer",
+    "gender": "Female",
+    "age": 28,
+    "height": "5'4\"",
+    "maritalStatus": "Never Married",
+    "religion": "Hindu",
+    "caste": "Iyer",
+    "manglik": "No",
+    "motherTongue": "Tamil",
+    "education": "PhD in Literature",
+    "profession": "Professor",
+    "income": "₹10 LPA",
+    "location": "Chennai, India",
+    "country": "India",
+    "diet": "Vegetarian",
+    "smoking": "No",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "Professor",
+      "motherOccupation": "Librarian",
+      "siblings": {
+        "brothers": 0,
+        "sisters": 1
+      },
+      "familyType": "Nuclear",
+      "familyStatus": "Middle Class",
+      "familyValues": "Traditional"
+    },
+    "partnerPreferences": {
+      "ageRange": "29-32",
+      "heightRange": "5'6\" - 6'0\"",
+      "religion": "Hindu",
+      "caste": "Iyer",
+      "education": "Postgraduate",
+      "location": "South India",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/f0/c8/a9/f0c8a9136a226400f8e64cc9ccdab5b6.jpg"
+  },
+  {
+    "id": "U1008",
+    "name": "Rohan Joshi",
+    "gender": "Male",
+    "age": 32,
+    "height": "5'11\"",
+    "maritalStatus": "Widowed",
+    "religion": "Hindu",
+    "caste": "Brahmin",
+    "manglik": "Yes",
+    "motherTongue": "Marathi",
+    "education": "B.E., VJTI Mumbai",
+    "profession": "Entrepreneur",
+    "income": "₹35 LPA",
+    "location": "Mumbai, India",
+    "country": "India",
+    "diet": "Occasionally Non-Veg",
+    "smoking": "No",
+    "drinking": "Occasionally",
+    "family": {
+      "fatherOccupation": "Retired Govt Officer",
+      "motherOccupation": "Homemaker",
+      "siblings": {
+        "brothers": 0,
+        "sisters": 1
+      },
+      "familyType": "Nuclear",
+      "familyStatus": "Affluent",
+      "familyValues": "Moderate"
+    },
+    "partnerPreferences": {
+      "ageRange": "28-32",
+      "heightRange": "5'2\" - 5'7\"",
+      "religion": "Hindu",
+      "caste": "Any",
+      "education": "Any",
+      "location": "Maharashtra",
+      "maritalStatus": "Divorced / Widowed / Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/cc/a3/c9/cca3c93bc84361c60b814260ed7bbc16.jpg"
+  },
+  {
+    "id": "U1009",
+    "name": "Neha Patel",
+    "gender": "Female",
+    "age": 27,
+    "height": "5'5\"",
+    "maritalStatus": "Never Married",
+    "religion": "Hindu",
+    "caste": "Patel",
+    "manglik": "Don't Know",
+    "motherTongue": "Gujarati",
+    "education": "M.Sc, Biotech",
+    "profession": "Research Scientist",
+    "income": "₹9 LPA",
+    "location": "Baroda, India",
+    "country": "India",
+    "diet": "Vegetarian",
+    "smoking": "No",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "Scientist",
+      "motherOccupation": "Lecturer",
+      "siblings": {
+        "brothers": 0,
+        "sisters": 2
+      },
+      "familyType": "Nuclear",
+      "familyStatus": "Middle Class",
+      "familyValues": "Traditional"
+    },
+    "partnerPreferences": {
+      "ageRange": "28-31",
+      "heightRange": "5'8\" - 6'0\"",
+      "religion": "Hindu",
+      "caste": "Any",
+      "education": "Science or Engineering",
+      "location": "India or Abroad",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/97/08/d3/9708d3219cf8a90e0af1f45fa3744ed1.jpg"
+  },
+  {
+    "id": "U1010",
+    "name": "Sandeep Reddy",
+    "gender": "Male",
+    "age": 29,
+    "height": "6'1\"",
+    "maritalStatus": "Never Married",
+    "religion": "Hindu",
+    "caste": "Reddy",
+    "manglik": "No",
+    "motherTongue": "Telugu",
+    "education": "MBBS, AIIMS Delhi",
+    "profession": "Doctor",
+    "income": "₹30 LPA",
+    "location": "Delhi, India",
+    "country": "India",
+    "diet": "Non-Vegetarian",
+    "smoking": "No",
+    "drinking": "No",
+    "family": {
+      "fatherOccupation": "IAS Officer",
+      "motherOccupation": "Doctor",
+      "siblings": {
+        "brothers": 1,
+        "sisters": 0
+      },
+      "familyType": "Joint",
+      "familyStatus": "Rich",
+      "familyValues": "Traditional"
+    },
+    "partnerPreferences": {
+      "ageRange": "24-27",
+      "heightRange": "5'3\" - 5'7\"",
+      "religion": "Hindu",
+      "caste": "Reddy preferred",
+      "education": "MBBS / BDS",
+      "location": "South India or Delhi",
+      "maritalStatus": "Never Married"
+    },
+    "profilePicture": "https://i.pinimg.com/736x/e7/93/07/e7930712498456400de1bf0b69e7eef3.jpg"
+  }
+]

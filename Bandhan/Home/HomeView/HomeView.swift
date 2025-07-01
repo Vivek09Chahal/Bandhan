@@ -10,13 +10,14 @@ import SwiftUI
 struct HomeView: View {
     
     @Binding var showUserProfile: Bool
+    @Environment(DataFetch.self) var dataFetch
     
     var body: some View {
         NavigationStack{
             ZStack(alignment: .leading){
                 VStack{
                     // MARK: - Top Section
-                    HeaderView(showUserProfile: $showUserProfile)
+                    HeaderView(showUserProfile: $showUserProfile, )
                         .padding(.horizontal)
                     Divider()
                     // MARK: - Filter View
@@ -27,10 +28,15 @@ struct HomeView: View {
                     VStack{
                         ScrollView {
                             LazyVStack {
-                                ForEach(0..<10) { index in
-                                    ProfileCard()
-                                        .containerRelativeFrame(.vertical)
-                                        .id(index)
+                                ForEach(dataFetch.profiles, id: \.id) { profile in
+                                    NavigationLink {
+                                        ProfileInfoView(profile: profile)
+                                    } label: {
+                                        ProfileCard(profile: profile)
+                                            .containerRelativeFrame(.vertical)
+                                            .id(profile.id)
+                                            .padding(.bottom)
+                                    }
                                 }
                             }
                             .scrollTargetLayout()
@@ -49,5 +55,6 @@ struct HomeView: View {
 #Preview {
     NavigationStack{
         HomeView(showUserProfile: .constant(false))
+            .environment(DataFetch())
     }
 }

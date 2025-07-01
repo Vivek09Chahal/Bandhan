@@ -10,6 +10,9 @@ import SwiftData
 
 @main
 struct BandhanApp: App {
+    
+    @State private var dataFetch = DataFetch()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -26,6 +29,7 @@ struct BandhanApp: App {
     var body: some Scene {
         WindowGroup {
             Tabs()
+                .environment(dataFetch)
         }
         .modelContainer(sharedModelContainer)
     }

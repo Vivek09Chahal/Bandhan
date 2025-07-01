@@ -23,7 +23,7 @@ enum UserMenu: String, Identifiable, CaseIterable, Equatable {
     func destinationView() -> some View {
         switch self {
         case .profile:
-            ProfileView()
+            UserProfileView()
         case .savedMatches:
             SavedMatchesView()
         case .notifications:
@@ -40,7 +40,6 @@ enum UserMenu: String, Identifiable, CaseIterable, Equatable {
 
 
 // default View for now
-struct ProfileView: View { var body: some View { Text("👤 Profile View").font(.largeTitle) } }
 struct SavedMatchesView: View { var body: some View { Text("💾 Saved Matches").font(.largeTitle) } }
 struct NotificationsView: View { var body: some View { Text("🔔 Notifications").font(.largeTitle) } }
 struct MessagesView: View { var body: some View { Text("💬 Messages").font(.largeTitle) } }
