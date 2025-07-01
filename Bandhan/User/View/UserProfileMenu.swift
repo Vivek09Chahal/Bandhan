@@ -9,10 +9,13 @@ import SwiftUI
 
 struct UserProfileMenu: View {
     
-    @State var selectedMenu: UserMenu? = nil
+    @Binding var showUserProfile: Bool
+    @Binding var selectedMenu: UserMenu?
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20){
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 20){
             // User Profile Image and Name
             VStack(spacing: 10) {
                 
@@ -55,15 +58,7 @@ struct UserProfileMenu: View {
             Divider()
             
             // MARK: - Navigation Menu Options
-            VStack(alignment: .leading, spacing: 25) {
-                menuItem(icon: "person", text: "Profile")
-                menuItem(icon: "bookmark", text: "Saved Matches")
-                menuItem(icon: "bell", text: "Notifications")
-                menuItem(icon: "message", text: "Messages")
-                menuItem(icon: "gear", text: "Settings")
-                menuItem(icon: "questionmark.circle", text: "Help & Support")
-            }
-            .padding(.horizontal)
+            NavigationMenuView(selectedMenu: $selectedMenu)
             
             Spacer()
             
@@ -86,29 +81,12 @@ struct UserProfileMenu: View {
         }
         .padding(.vertical)
         .frame(maxWidth: 300, maxHeight: .infinity, alignment: .leading)
-        .background(.secondary)
+        .background(colorScheme == .dark ? Color.black : Color.white)
         .edgesIgnoringSafeArea(.bottom)
-    }
-    
-}
-
-extension UserProfileMenu{
-    
-    private func menuItem(icon: String, text: String) -> some View {
-        HStack(spacing: 15) {
-            Image(systemName: icon)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 22, height: 22)
-                .foregroundColor(.primary)
-            Text(text)
-                .font(.headline)
-                .foregroundColor(.primary)
         }
     }
-    
 }
 
-#Preview {
-    UserProfileMenu()
-}
+//#Preview {
+//    UserProfileMenu()
+//}
