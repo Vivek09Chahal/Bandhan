@@ -21,7 +21,7 @@ struct Tabs: View {
                     }
                     
                     Tab("Activity", systemImage: "clock.fill"){
-                        //HomeView()
+                        ActivityView(showUserProfile: $showUserProfile)
                     }
                     
                     Tab("Messages", systemImage: "message.fill"){

@@ -80,20 +80,16 @@ struct ProfileCard: View {
                     details(info1: profile.profession, info2: profile.income)
                     details(info1: profile.education)
                     details(info1: "Profile Manager by Herself") // Profile Manager By Whom
-                        .padding(.horizontal)
                         .padding(.vertical, 8)
                         .background{
-                            RoundedRectangle(cornerRadius: 8)
-                                .foregroundStyle(LinearGradient(colors: [.red, .orange], startPoint: .leading, endPoint: .trailing).opacity(0.4))
+                            Rectangle()
+                                .foregroundStyle(LinearGradient(colors: [.orange, .clear], startPoint: .leading, endPoint: .trailing).opacity(0.4))
+                                .frame(width: UIScreen.main.bounds.width/1.1, height: 30)
+                                .offset(x: 65)
                         }
                     
                     // Options
-                    HStack{
-                        action(title: "Message", imageName: "envelope.badge.person.crop.fill")
-                        action(title: "Interested", imageName: "bolt.heart")
-                        action(title: "Shortlist", imageName: "star")
-                        action(title: "Chat", imageName: "message")
-                    }
+                    ActionButton()
                 }
                 
             }
@@ -112,29 +108,6 @@ extension ProfileCard {
             Text(info2)
         }
         .foregroundStyle(.white)
-    }
-    
-    // action section
-    func action(title: String, imageName: String) -> some View {
-        Button {
-            //
-        } label: {
-            VStack{
-                HStack{
-                    Image(systemName: imageName)
-                        .frame(width: 30, height: 25)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background{
-                            Circle().fill(Color.red.opacity(0.5))
-                        }
-                }
-                Text(title)
-                    .font(.caption2)
-            }
-            .padding(.trailing)
-            .foregroundStyle(.white)
-        }
     }
 }
 
