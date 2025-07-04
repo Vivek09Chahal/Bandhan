@@ -27,7 +27,8 @@ extension ProfilesData {
         diet: "Vegetarian",
         smoking: "No",
         drinking: "No",
-        profilePicture: "https://i.pinimg.com/736x/3d/fc/51/3dfc51dbcb22d4d274b4f5498a7c6c85.jpg",
+        profilePicture: ["https://i.pinimg.com/736x/3d/fc/51/3dfc51dbcb22d4d274b4f5498a7c6c85.jpg",
+                        "https://i.pinimg.com/736x/9f/4f/5f/9f4f5fa2348ee45324fc70fc8b49da04.jpg"],
         family: Family(
             fatherOccupation: "Retired Banker",
             motherOccupation: "Homemaker",

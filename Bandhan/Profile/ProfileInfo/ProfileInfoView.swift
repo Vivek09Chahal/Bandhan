@@ -14,7 +14,6 @@ struct ProfileInfoView: View {
     @Namespace var profileAnimation
     var profile: ProfilesData
     
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -85,19 +84,12 @@ struct ImageView: View {
     
     var profile: ProfilesData
     @Environment(\.dismiss) var dismiss
+    @State var picsSheet: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom){
-            AsyncImage(url: URL(string: profile.profilePicture)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: UIScreen.main.bounds.height / 2.3)
-                    .clipped()
-            } placeholder: {
-                Color.gray.opacity(0.3)
-                    .frame(height: UIScreen.main.bounds.height / 2)
-            }
+            ProfilePhotoView(height: 2.3, pic: profile.profilePicture.first!)
+            .clipped()
             .overlay(
                 LinearGradient(
                     gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
@@ -132,13 +124,21 @@ struct ImageView: View {
             .foregroundStyle(.white)
             .padding()
         }
+        .sheet(isPresented: $picsSheet){
+            ProfilePicsSheet(profile: profile)
+        }
         .navigationBarBackButtonHidden(true)
         .toolbar{
             ToolbarItem(){
                 HStack{
-                    Image(systemName: "photo.on.rectangle.angled")
-                    Text("4")
-                        .padding(.trailing)
+                    HStack{
+                        Image(systemName: "photo.on.rectangle.angled")
+                        Text("\(profile.profilePicture.count)")
+                            .padding(.trailing)
+                    }
+                    .onTapGesture {
+                        picsSheet.toggle()
+                    }
                     Image(systemName: "ellipsis")
                         .rotationEffect(Angle(degrees: 90))
                 }

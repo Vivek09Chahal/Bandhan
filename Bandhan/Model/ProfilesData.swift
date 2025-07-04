@@ -26,7 +26,7 @@ struct ProfilesData: Codable, Identifiable {
     var diet: String
     var smoking: String
     var drinking: String
-    var profilePicture: String
+    var profilePicture: [String]
     var family: Family
     var partnerPreferences: PartnerPreference
 }

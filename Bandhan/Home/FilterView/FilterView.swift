@@ -12,7 +12,10 @@ struct FilterView: View {
         case all, handpicked
     }
     
+    @Environment(\.colorScheme) var colorScheme
     @State private var selectedFilter: FilterOption = .all
+    @Binding var showFilterSheet: Bool
+    @Environment(DataFetch.self) var dataFetch
     
     var body: some View {
         NavigationStack{
@@ -27,7 +30,10 @@ struct FilterView: View {
                         FilterButton(
                             title: "All",
                             isSelected: selectedFilter == .all,
-                            action: { selectedFilter = .all }
+                            action: { 
+                                selectedFilter = .all
+                                dataFetch.showHandpickedOnly = false
+                            }
                         )
                         
                         // Handpicked filter option
@@ -35,16 +41,31 @@ struct FilterView: View {
                             title: "Handpicked",
                             icon: "diamond.fill",
                             isSelected: selectedFilter == .handpicked,
-                            action: { selectedFilter = .handpicked }
+                            action: { 
+                                selectedFilter = .handpicked 
+                                dataFetch.showHandpickedOnly = true
+                            }
                         )
                     }
                 }
                 .animation(.linear(duration: 0.2), value: selectedFilter)
-                
-                Image(systemName: "line.3.horizontal.decrease.circle")
-                    .resizable()
-                    .frame(width: 30, height: 30)
+                Button {
+                    showFilterSheet.toggle()
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .resizable()
+                            .frame(width: 26, height: 26)
+                            .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
+                        
+                        if dataFetch.hasActiveFilters {
+                            Circle()
+                                .fill(Color.blue)
+                                .frame(width: 10, height: 10)
+                        }
+                    }
                     .padding()
+                }
             }
         }
     }
@@ -69,7 +90,7 @@ struct FilterButton: View {
             action()
         } label: {
             HStack {
-                if let icon = icon {  
+                if let icon = icon {
                     Image(systemName: icon)
                         .font(.system(size: 14))
                 }
@@ -89,5 +110,6 @@ struct FilterButton: View {
 }
 
 #Preview {
-    FilterView()
+    FilterView(showFilterSheet: .constant(true))
+        .environment(DataFetch())
 }

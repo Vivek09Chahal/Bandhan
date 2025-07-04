@@ -15,15 +15,7 @@ struct ProfileCard: View {
         ZStack(){
             
             // MARK: - Image
-            AsyncImage(url: URL(string: profile.profilePicture)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/1.6)
-            } placeholder: {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-            }
+            ProfilePhotoView(width: 1.1, height: 1.6, pic: profile.profilePicture.first!)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(
                 ZStack {
@@ -66,7 +58,7 @@ struct ProfileCard: View {
                     
                     // No. of pics uploaded
                     Image(systemName: "photo.stack")
-                    Text("4")
+                    Text("\(profile.profilePicture.count)")
                 }
                 .foregroundStyle(.white)
                 
