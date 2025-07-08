@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HeaderView: View {
     
+    var title: String
+    var headerDescription: String?
     @Binding var showUserProfile: Bool
     
     var body: some View {
@@ -25,10 +27,10 @@ struct HeaderView: View {
             
             // headline
             VStack(alignment: .leading){
-                Text("My Matches")
+                Text(title)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text("as per partner preference")
+                Text(headerDescription ?? "")
                     .font(.subheadline)
             }
             Spacer()
@@ -49,5 +51,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(showUserProfile: .constant(true))
+    HeaderView(title: "Matches", headerDescription: "as per partner preference", showUserProfile: .constant(true))
 }

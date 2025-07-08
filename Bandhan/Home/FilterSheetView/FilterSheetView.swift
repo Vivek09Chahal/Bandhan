@@ -139,7 +139,7 @@ struct FilterSheetView: View {
     /// - Returns: A styled button view with selection indicator
     private func filterOptionButton(option: String, category: FilterSheetViewModel) -> some View {
         Button {
-            viewModel.toggleOption(option, for: category)
+            viewModel.toggleOption(option: option, for: category)
         } label: {
             HStack {
                 Text(option)

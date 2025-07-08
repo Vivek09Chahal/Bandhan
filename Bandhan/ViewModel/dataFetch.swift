@@ -63,7 +63,7 @@ class DataFetch {
         
         // Apply detailed filters if any
         if let viewModel = activeFilterViewModel {
-            filteredProfiles = viewModel.filterProfiles(filteredProfiles)
+            filteredProfiles = viewModel.filterProfiles(profiles: filteredProfiles)
             hasActiveFilters = !viewModel.appliedFilters.isEmpty
         } else {
             hasActiveFilters = false

@@ -18,7 +18,7 @@ struct HomeView: View {
             ZStack(alignment: .leading){
                 VStack{
                     // MARK: - Top Section
-                    HeaderView(showUserProfile: $showUserProfile)
+                    HeaderView(title: "Matches", headerDescription: "as per partner preference", showUserProfile: $showUserProfile)
                         .padding(.horizontal)
                     Divider()
                     

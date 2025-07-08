@@ -132,7 +132,7 @@ class FilterViewModel {
     /// - Parameters:
     ///   - option: The option string to toggle
     ///   - filter: The filter category the option belongs to
-    func toggleOption(_ option: String, for filter: FilterSheetViewModel) {
+    func toggleOption(option: String, for filter: FilterSheetViewModel) {
         // Initialize empty array for filter if it doesn't exist
         if selectedFilters[filter] == nil {
             selectedFilters[filter] = []
@@ -163,7 +163,7 @@ class FilterViewModel {
     /// Filters profiles based on currently applied filters
     /// - Parameter profiles: Array of profiles to filter
     /// - Returns: Filtered array of profiles that match all applied filters
-    func filterProfiles(_ profiles: [ProfilesData]) -> [ProfilesData] {
+    func filterProfiles(profiles: [ProfilesData]) -> [ProfilesData] {
         // Return all profiles if no filters are applied
         guard !appliedFilters.isEmpty else { return profiles }
         

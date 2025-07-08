@@ -29,7 +29,7 @@ struct Tabs: View {
                     }
                     
                     Tab("Premium", systemImage: "checkmark.seal.fill"){
-                        // HomeView()
+                        MembershipView()
                     }
                 }
                 .ignoresSafeArea()

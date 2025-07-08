@@ -16,7 +16,7 @@ struct ActivityView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HeaderView(showUserProfile: $showUserProfile)
+            HeaderView(title: "Matches", showUserProfile: $showUserProfile)
                 .padding(.horizontal)
             Divider()
             
