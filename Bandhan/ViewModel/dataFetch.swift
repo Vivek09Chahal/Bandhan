@@ -11,21 +11,22 @@ import SwiftUI
 @Observable
 class DataFetch {
     
-    private var allProfiles: [ProfilesData] = []
+    // profiles data
     var profiles: [ProfilesData] = []
-    var showHandpickedOnly: Bool = false {
-        didSet {
-            applyCurrentFilters()
-        }
-    }
-    var hasActiveFilters: Bool = false
-    private var activeFilterViewModel: FilterViewModel?
+    private var allProfiles: [ProfilesData] = []
+    // user data
+    var userProfile: ProfilesData? = nil
     
-    init(){
-        self.allProfiles = load("ProfilesData")
+    func userDataLoad(jsonFileName: String){
+        self.userProfile = load(jsonFileName)
+    }
+    
+    func profileDataLoad(jsonFileName: String){
+        self.allProfiles = load(jsonFileName)
         self.profiles = allProfiles
     }
     
+    // loading Data
     func load<T: Decodable>(_ filename: String) -> T {
         
         guard let file = Bundle.main.url(forResource: filename, withExtension: "json")
@@ -41,6 +42,16 @@ class DataFetch {
             fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
         }
     }
+    
+    
+    var showHandpickedOnly: Bool = false {
+        didSet {
+            applyCurrentFilters()
+        }
+    }
+    
+    var hasActiveFilters: Bool = false
+    private var activeFilterViewModel: FilterViewModel?
     
     func applyFilters(_ viewModel: FilterViewModel) {
         activeFilterViewModel = viewModel
@@ -77,6 +88,6 @@ class DataFetch {
         activeFilterViewModel = nil
         showHandpickedOnly = false
         hasActiveFilters = false
-        profiles = allProfiles
+        self.profiles = allProfiles
     }
 }

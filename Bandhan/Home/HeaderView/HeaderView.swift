@@ -9,9 +9,28 @@ import SwiftUI
 
 struct HeaderView: View {
     
-    var title: String
-    var headerDescription: String?
-    @Binding var showUserProfile: Bool
+    @EnvironmentObject var tabManager: HeaderViewManager
+    
+    // Computed properties for dynamic content based on selected tab
+    private var title: String {
+        switch tabManager.selectedTab {
+        case 0: return "Matches"
+        case 1: return "Activity"
+        case 2: return "Chat"
+        case 3: return "Membership"
+        default: return "Matches"
+        }
+    }
+    
+    private var headerDescription: String {
+        switch tabManager.selectedTab {
+        case 0: return "as per partner preference"
+        case 1: return "your recent activity"
+        case 2: return "conversations"
+        case 3: return "upgrade your experience"
+        default: return "as per partner preference"
+        }
+    }
     
     var body: some View {
         HStack(alignment: .top){
@@ -22,7 +41,7 @@ struct HeaderView: View {
                 .scaledToFit()
                 .clipShape(Circle())
                 .onTapGesture {
-                    showUserProfile.toggle()
+                    tabManager.showUserProfile.toggle()
                 }
             
             // headline
@@ -30,7 +49,7 @@ struct HeaderView: View {
                 Text(title)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text(headerDescription ?? "")
+                Text(headerDescription)
                     .font(.subheadline)
             }
             Spacer()
@@ -51,5 +70,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(title: "Matches", headerDescription: "as per partner preference", showUserProfile: .constant(true))
+    HeaderView()
 }

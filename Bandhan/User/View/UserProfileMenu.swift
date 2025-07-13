@@ -9,7 +9,6 @@ import SwiftUI
 
 struct UserProfileMenu: View {
     
-    @Binding var showUserProfile: Bool
     @Binding var selectedMenu: UserMenu?
     @Environment(\.colorScheme) var colorScheme
     
@@ -86,7 +85,3 @@ struct UserProfileMenu: View {
         }
     }
 }
-
-//#Preview {
-//    UserProfileMenu()
-//}

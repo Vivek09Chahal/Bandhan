@@ -35,33 +35,6 @@ enum ProfileCaseIters: String, CaseIterable, Hashable {
     }
 }
 
-//struct TabContentView: View {
-//    
-//    let profile: ProfilesData
-//    
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: 40) {
-//            
-//            // About Section
-//            AboutSection(profile: profile)
-//            .padding(.bottom)
-//            .id(ProfileCaseItere.about.scrollID)
-//            
-//            // Family Section
-//            FamilySection(profile: profile)
-//            .padding(.bottom)
-//            .id(ProfileCaseItere.family.scrollID)
-//            
-//            // Preferences Section
-//            PreferenceSection(profile: profile)
-//            .id(ProfileCaseItere.partnerPreference.scrollID)
-//        }
-//        .padding()
-//        .padding(.bottom, 150)
-//    }
-//}
-
-
 struct AboutSection: View {
     
     @State private var showFullDescription: Bool = false

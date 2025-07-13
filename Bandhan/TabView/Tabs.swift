@@ -10,72 +10,70 @@ import SwiftUI
 struct Tabs: View {
     
     @State private var selectedMenu: UserMenu? = nil
-    @State var showUserProfile: Bool = false
+    @StateObject private var tabManager = HeaderViewManager()
+    
     
     var body: some View {
         NavigationStack{
             ZStack(alignment: .leading){
-                TabView{
-                    Tab("Matches", systemImage: "square.stack.3d.up.fill"){
-                        HomeView(showUserProfile: $showUserProfile)
+                TabView(selection: $tabManager.selectedTab){
+                    Tab("Matches", systemImage: "square.stack.3d.up.fill", value: 0){
+                        HomeView()
                     }
                     
-                    Tab("Activity", systemImage: "clock.fill"){
-                        ActivityView(showUserProfile: $showUserProfile)
+                    Tab("Activity", systemImage: "clock.fill", value: 1){
+                        ActivityView()
                     }
                     
-                    Tab("Messages", systemImage: "message.fill"){
-                        //HomeView()
+                    Tab("Messages", systemImage: "message.fill", value: 2){
+                        // Message View()
                     }
                     
-                    Tab("Premium", systemImage: "checkmark.seal.fill"){
+                    Tab("Membership", systemImage: "checkmark.seal.fill", value: 3){
                         MembershipView()
                     }
                 }
                 .ignoresSafeArea()
                 .overlay(
-                    Color.black.opacity(showUserProfile ? 0.5 : 0)
+                    Color.black.opacity(tabManager.showUserProfile ? 0.5 : 0)
                         .ignoresSafeArea()
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                showUserProfile = false
+                                tabManager.showUserProfile = false
                             }
                         }
                 )
                 
                 // MARK: - User Profile Menu
-                if showUserProfile {
+                if tabManager.showUserProfile {
                     UserProfileMenu(
-                        showUserProfile: $showUserProfile,
                         selectedMenu: $selectedMenu
                     )
                     .frame(width: 300)
                     .transition(.move(edge: .leading))
                     .zIndex(1)
                 }
-                
             }
             // MARK: - Navigate to Menu Item
             .navigationDestination(item: $selectedMenu) { menu in
                 menu.destinationView()
-                    .navigationBarTitle(menu.rawValue, displayMode: .large)
-                    .edgesIgnoringSafeArea(.all)
             }
             .gesture(
                 DragGesture()
                     .onEnded { gesture in
                         if gesture.translation.width > 50 {
                             withAnimation(.spring()) {
-                                showUserProfile = true
+                                tabManager.showUserProfile = true
                             }
                         } else if gesture.translation.width < -50 {
                             withAnimation(.spring()) {
-                                showUserProfile = false
+                                tabManager.showUserProfile = false
                             }
                         }
                     }
             )
         }
+        .environmentObject(tabManager)
     }
 }
 

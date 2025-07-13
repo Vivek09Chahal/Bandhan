@@ -10,13 +10,12 @@ import SwiftUI
 struct ActivityView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    @Binding var showUserProfile: Bool
     @Namespace var activityAnimation
     @State private var selectedTab: ActityCaseIters = .reveived
     
     var body: some View {
         VStack(alignment: .leading) {
-            HeaderView(title: "Matches", showUserProfile: $showUserProfile)
+            HeaderView()
                 .padding(.horizontal)
             Divider()
             
@@ -112,5 +111,5 @@ extension ActivityView {
 }
 
 #Preview {
-    ActivityView(showUserProfile: .constant(true))
+    ActivityView()
 }

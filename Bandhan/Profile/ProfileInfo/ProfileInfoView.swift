@@ -41,7 +41,6 @@ struct ProfileInfoView: View {
     }
 }
 
-
 #Preview {
     ProfileInfoView(profile: ProfilesData.sampleProfile)
 }

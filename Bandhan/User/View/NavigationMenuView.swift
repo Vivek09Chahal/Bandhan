@@ -44,9 +44,3 @@ struct NavigationMenuView: View {
         }
     }
 }
-//
-//#Preview {
-//    NavigationStack {
-//        NavigationMenuView()
-//    }
-//}

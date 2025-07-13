@@ -9,16 +9,15 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @Binding var showUserProfile: Bool
     @Environment(DataFetch.self) var dataFetch
     @State var showFilterSheet: Bool = false
+    @State var showingSearchView: Bool = false
     
     var body: some View {
         NavigationStack{
             ZStack(alignment: .leading){
                 VStack{
-                    // MARK: - Top Section
-                    HeaderView(title: "Matches", headerDescription: "as per partner preference", showUserProfile: $showUserProfile)
+                    HeaderView()
                         .padding(.horizontal)
                     Divider()
                     
@@ -34,27 +33,13 @@ struct HomeView: View {
                                     .font(.system(size: 60))
                                     .foregroundColor(.secondary)
                                 
-                                Text("No matches found")
+                                Text("Sorry it's not on you, It's on Us")
                                     .font(.headline)
                                 
-                                Text("Try adjusting your filters to see more profiles")
+                                Text("No matches found")
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
-                                    .multilineTextAlignment(.center)
-                                
-                                Button {
-                                    dataFetch.resetFilters()
-                                } label: {
-                                    Text("Reset Filters")
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 10)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Color.blue)
-                                        )
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.top, 10)
+                                    .padding(.top, 10)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .padding()
@@ -91,7 +76,12 @@ struct HomeView: View {
 
 #Preview {
     NavigationStack{
-        HomeView(showUserProfile: .constant(false))
-            .environment(DataFetch())
+        HomeView()
+            .environment({
+                let dataFetch = DataFetch()
+                // Load sample data for preview
+                dataFetch.profileDataLoad(jsonFileName: "ProfilesData")
+                return dataFetch
+            }())
     }
 }

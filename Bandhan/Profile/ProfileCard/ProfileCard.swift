@@ -15,7 +15,7 @@ struct ProfileCard: View {
         ZStack(){
             
             // MARK: - Image
-            ProfilePhotoView(width: 1.1, height: 1.6, pic: profile.profilePicture.first!)
+            ProfilePhotoView(width: 1.1, height: 1.7, pic: profile.profilePicture.first!)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(
                 ZStack {
@@ -87,7 +87,7 @@ struct ProfileCard: View {
             }
             .padding()
         }
-        .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/1.6)
+        .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/1.7)
     }
 }
 

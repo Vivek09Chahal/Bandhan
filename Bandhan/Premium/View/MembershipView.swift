@@ -71,7 +71,6 @@ enum MembershipPlans: String, CaseIterable {
             )
         }
     }
-    
 }
 
 
