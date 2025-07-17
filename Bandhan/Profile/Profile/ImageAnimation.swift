@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfilePicsSheet: View {
+struct ImageAnimation: View {
     
     var profile: ProfilesData
     @Environment(\.dismiss) var dismiss
@@ -38,6 +38,6 @@ struct ProfilePicsSheet: View {
     }
 }
 
-#Preview{
-    ProfilePicsSheet(profile: ProfilesData.sampleProfile)
-}
+//#Preview{
+//    ImageAnimation(profile: dev.profileVM)
+//}

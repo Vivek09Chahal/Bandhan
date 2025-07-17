@@ -9,9 +9,9 @@ import SwiftUI
 
 struct UserProfileView: View {
     
+    @EnvironmentObject var userVM: UserViewModel
     @Namespace private var imageNamespace
     @State private var scrollOffset: CGFloat = 0
-    @Environment(DataFetch.self) var dataFetch
 
     let fullSize: CGFloat = UIScreen.main.bounds.height/2
     let minSize: CGFloat = 180
@@ -52,7 +52,7 @@ struct UserProfileView: View {
         let size = fullSize - (fullSize - minSize) * shrinkAmount
         let cornerRadius = shrinkAmount * (size / 2)
 
-        return AsyncImage(url: URL(string: dataFetch.userProfile!.profilePicture.first!)) { img in
+        return AsyncImage(url: URL(string: userVM.userData!.profilePicture.first!)) { img in
             img
                 .resizable()
                 .scaledToFill()
@@ -78,12 +78,12 @@ private struct ScrollOffsetPreferenceKey: PreferenceKey {
     }
 }
 
-#Preview {
-    UserProfileView()
-        .environment({
-            let dataFetch = DataFetch()
-            // Load sample data for preview
-            dataFetch.userDataLoad(jsonFileName: "userData")
-            return dataFetch
-        }())
+struct UserProfileView_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationStack{
+            UserProfileView()
+        }
+        .environmentObject(dev.profileVM)
+    }
 }
+

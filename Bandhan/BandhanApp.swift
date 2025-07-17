@@ -11,7 +11,8 @@ import SwiftData
 @main
 struct BandhanApp: App {
     
-    @State private var dataFetch = DataFetch()
+    @StateObject private var vm = HomeViewModel()
+    @StateObject private var userVM = UserViewModel()
     
 //    var sharedModelContainer: ModelContainer = {
 //        let schema = Schema([
@@ -29,11 +30,8 @@ struct BandhanApp: App {
     var body: some Scene {
         WindowGroup {
             Tabs()
-                .environment(dataFetch)
-                .onAppear {
-                    dataFetch.userDataLoad(jsonFileName: "userData")
-                    dataFetch.profileDataLoad(jsonFileName: "ProfilesData")
-                }
+                .environmentObject(vm)
+                .environmentObject(userVM)
         }
 //        .modelContainer(sharedModelContainer)
     }

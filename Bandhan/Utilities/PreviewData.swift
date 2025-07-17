@@ -5,10 +5,24 @@
 //  Created by Vivek on 7/2/25.
 //
 
-import Foundation
+import SwiftUI
 
-extension ProfilesData {
-    static let sampleProfile = ProfilesData(
+extension PreviewProvider {
+    
+    static var dev: profilesPreview {
+        return profilesPreview.instance
+    }
+    
+}
+
+
+class profilesPreview{
+    
+    let profileVM = HomeViewModel()
+    static let instance = profilesPreview()
+    private init() {}
+    
+    let sampleProfile = ProfilesData(
         id: "U1001",
         name: "Ananya Sharma",
         gender: "Female",
@@ -50,11 +64,5 @@ extension ProfilesData {
             maritalStatus: "Never Married"
         )
     )
-    
-    static let sampleProfiles: [ProfilesData] = [sampleProfile]
-}
 
-extension DataFetch {
-    static let preview = DataFetch()
 }
-

@@ -7,8 +7,29 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
-// MARK: - will use cases to navigate through Profile Menu Items
+class UserViewModel: ObservableObject{
+    
+    @Published var userData: ProfilesData? = nil
+    
+    private var userDataService = UserDataServices()
+    private var cancallable = Set<AnyCancellable>()
+    
+    init(){
+        addSubscriber()
+    }
+    
+    func addSubscriber(){
+        userDataService.$userData
+            .debounce(for: 0.5, scheduler: DispatchQueue.main)
+            .sink { [weak self] returnedProfile in
+                self?.userData = returnedProfile
+            }
+            .store(in: &cancallable)
+    }
+}
+
 enum UserMenu: String, Identifiable, CaseIterable, Equatable {
     var id: String { rawValue }
     case profile = "Profile"
@@ -37,7 +58,6 @@ enum UserMenu: String, Identifiable, CaseIterable, Equatable {
         }
     }
 }
-
 
 // default View for now
 struct SavedMatchesView: View { var body: some View { Text("💾 Saved Matches").font(.largeTitle) } }

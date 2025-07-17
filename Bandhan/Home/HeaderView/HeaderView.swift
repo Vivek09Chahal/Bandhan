@@ -10,8 +10,63 @@ import SwiftUI
 struct HeaderView: View {
     
     @EnvironmentObject var tabManager: HeaderViewManager
+    @State var isSearchBarActive: Bool = false
     
-    // Computed properties for dynamic content based on selected tab
+    var body: some View {
+        HStack(alignment: .top){
+            imageState
+            headlineState
+            Spacer()
+            notificationState
+        }
+    }
+}
+
+#Preview {
+    HeaderView()
+        .environmentObject(HeaderViewManager())
+}
+
+extension HeaderView{
+    var imageState: some View {
+        Image("profilePic")
+            .resizable()
+            .frame(width: 50, height: 50)
+            .scaledToFit()
+            .clipShape(Circle())
+            .onTapGesture {
+                tabManager.showUserProfile.toggle()
+            }
+    }
+    
+    var headlineState: some View {
+        VStack(alignment: .leading){
+            Text(title)
+                .font(.title2)
+                .fontWeight(.bold)
+            Text(headerDescription)
+                .font(.subheadline)
+        }
+    }
+    
+    var notificationState: some View {
+        HStack{
+            Image(systemName: "bell")
+                .resizable()
+                .frame(width: 25, height: 25)
+                .padding(.trailing)
+            Image(systemName: "magnifyingglass")
+                .resizable()
+                .frame(width: 25, height: 25)
+        }
+        .padding()
+    }
+    
+}
+
+
+extension HeaderView{
+    
     private var title: String {
         switch tabManager.selectedTab {
         case 0: return "Matches"
@@ -32,43 +87,4 @@ struct HeaderView: View {
         }
     }
     
-    var body: some View {
-        HStack(alignment: .top){
-            // user proile pic
-            Image("profilePic")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .scaledToFit()
-                .clipShape(Circle())
-                .onTapGesture {
-                    tabManager.showUserProfile.toggle()
-                }
-            
-            // headline
-            VStack(alignment: .leading){
-                Text(title)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                Text(headerDescription)
-                    .font(.subheadline)
-            }
-            Spacer()
-            
-            // Notification, Search
-            HStack{
-                Image(systemName: "bell")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .padding(.trailing)
-                Image(systemName: "magnifyingglass")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-            }
-            .padding()
-        }
-    }
-}
-
-#Preview {
-    HeaderView()
 }

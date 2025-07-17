@@ -25,7 +25,6 @@ struct ProfileCard: View {
                         startPoint: .center,
                         endPoint: .bottom
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
                     
                     // Border stroke
                     RoundedRectangle(cornerRadius: 20)
@@ -42,24 +41,7 @@ struct ProfileCard: View {
             
             // MARK: - top Section
             VStack(alignment: .leading){
-                HStack{
-                    // Compatibility
-                    Group{
-                        Image(systemName: "hand.thumbsup.fill")
-                        Text("Most Compatible")
-                    }
-                    .font(.caption)
-                    .padding(10)
-                    .background{
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    
-                    // No. of pics uploaded
-                    Image(systemName: "photo.stack")
-                    Text("\(profile.profilePicture.count)")
-                }
+                cardHeader
                 .foregroundStyle(.white)
                 
                 Spacer()
@@ -73,15 +55,10 @@ struct ProfileCard: View {
                     details(info1: profile.education)
                     details(info1: "Profile Manager by Herself") // Profile Manager By Whom
                         .padding(.vertical, 8)
-                        .background{
-                            Rectangle()
-                                .foregroundStyle(LinearGradient(colors: [.orange, .clear], startPoint: .leading, endPoint: .trailing).opacity(0.4))
-                                .frame(width: UIScreen.main.bounds.width/1.1, height: 30)
-                                .offset(x: 65)
-                        }
+                        .managedBy()
                     
                     // Options
-                    ActionButton()
+                    ActionButton(id: profile.id)
                 }
                 
             }
@@ -93,7 +70,28 @@ struct ProfileCard: View {
 
 extension ProfileCard {
     
-    // detail Section
+    var cardHeader: some View {
+        HStack{
+            // Compatibility
+            Group{
+                Image(systemName: "hand.thumbsup.fill")
+                Text("Most Compatible")
+            }
+            .font(.caption)
+            .padding(10)
+            .background{
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            
+            // No. of pics uploaded
+            Image(systemName: "photo.stack")
+            Text("\(profile.profilePicture.count)")
+        }
+        .foregroundStyle(.white)
+    }
+    
     func details(info1: String, info2: String = "") -> some View {
         HStack{
             Text(info1)
@@ -101,8 +99,4 @@ extension ProfileCard {
         }
         .foregroundStyle(.white)
     }
-}
-
-#Preview {
-    ProfileCard(profile: ProfilesData.sampleProfile)
 }

@@ -9,21 +9,25 @@ import SwiftUI
 
 struct ActionButton: View {
     
+    
+    var id: String
+    var activitiesVM: Activities = Activities()
+    
     var body: some View {
         HStack{
-            action(title: "Message", imageName: "envelope.badge.person.crop.fill")
-            action(title: "Interested", imageName: "bolt.heart")
-            action(title: "Shortlist", imageName: "star")
-            action(title: "Chat", imageName: "message")
+            action(title: "Message", imageName: "envelope.badge.person.crop.fill", action: ())
+            action(title: "Interested", imageName: "bolt.heart", action: ())
+            action(title: "Shortlist", imageName: "star", action: activitiesVM.shortlistedProfilesID.append(id))
+            action(title: "Chat", imageName: "message", action: ())
         }
     }
 }
 
 extension ActionButton {
     
-    func action(title: String, imageName: String) -> some View {
+    func action(title: String, imageName: String, action: ()) -> some View {
         Button {
-            //
+            action
         } label: {
             VStack{
                 HStack{
@@ -45,5 +49,5 @@ extension ActionButton {
 }
 
 #Preview {
-    ActionButton()
+    ActionButton(id: "1122")
 }

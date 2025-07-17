@@ -92,18 +92,18 @@ struct MembershipView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .foregroundColor(Color(UIColor.systemGray6))
                     .frame(height: 50)
-                HStack(spacing: 0) {
+//                HStack(spacing: 0) {
                     // All filter option
-                    FilterButton(title: "Self-Service", isSelected: membershipType == .selfService, action: {
-                        membershipType = .selfService
-                    })
-                    
-                    // Handpicked filter option
-                    FilterButton(title: "Assisted", isSelected: membershipType == .assisted, action:    {
-                        //action
-                        membershipType = .assisted
-                    })
-                }
+//                    FilterButton(title: "Self-Service", isSelected: membershipType == .selfService, action: {
+//                        membershipType = .selfService
+//                    })
+//                    
+//                    // Handpicked filter option
+//                    FilterButton(title: "Assisted", isSelected: membershipType == .assisted, action:    {
+//                        //action
+//                        membershipType = .assisted
+//                    })
+//                }
             }
             membershipType.view()
             Spacer()

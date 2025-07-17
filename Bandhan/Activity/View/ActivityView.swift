@@ -11,84 +11,64 @@ struct ActivityView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Namespace var activityAnimation
-    @State private var selectedTab: ActityCaseIters = .reveived
+    @State private var selectedInterest: ActivityCaseIters = .received
+    @State var activityCases: ActivityCases? = nil
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HeaderView()
-                .padding(.horizontal)
-            Divider()
-            
-            // Activity Numbers Section
-            HStack(spacing: 15) {
-                activityNumbers(text: "Profile Visit", color: .indigo, number: 12)
-                activityNumbers(text: "Shortlisted", color: .yellow, number: 5)
-                activityNumbers(text: "Contact Views", color: .blue, number: 8)
-            }
-            HStack{
-                Text("Interests")
-                    .font(.title)
-                    .fontWeight(.bold)
-                Spacer()
-                Text("View All")
-                    .fontWeight(.bold)
-                    .foregroundStyle(.red)
-            }
-            .padding(.horizontal)
-            
-            ScrollViewReader { proxy in
-                tabSwitcher(proxy: proxy)
+        NavigationStack{
+            VStack(alignment: .leading) {
+                HeaderView()
                     .padding(.horizontal)
-                    .padding(.top)
-                ScrollView(.vertical, showsIndicators: false) {
-                    selectedTab.activityContent()
-                }
+                Divider()
+                numberActivity
+                
+                interestHeading
+                profileStates
+                
+                Spacer()
             }
-            
-            Spacer()
+            .background(Color(UIColor.systemGray6).opacity(0.4))
+            .navigationDestination(for: ActivityCases.self) { activityCase in
+                activityCase.navigateView()
+            }
         }
-        .background(Color(UIColor.systemGray6).opacity(0.4))
     }
 }
 
 extension ActivityView {
     
-    func activityNumbers(text: String, color: Color, number: Int) -> some View {
-        VStack(alignment: .center) {
-            Text("\(number)")
-                .font(.title2)
-                .fontWeight(.bold)
-                .padding()
-                .background {
-                    Circle()
-                        .foregroundStyle(color.opacity(0.2))
+    var numberActivity: some View {
+        HStack{
+            ForEach(ActivityCases.allCases, id: \.self){ activityCase in
+                NavigationLink(value: activityCase) {
+                    activityCase.navigateViewItem()
                 }
-                .padding(.bottom, 5)
-            
-            Text(text)
-                .font(.caption)
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
+                .foregroundStyle(.primary)
+            }
         }
-        .padding()
-        .background {
-            RoundedRectangle(cornerRadius: 15)
-                .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
-                .shadow(radius: 2)
+    }
+    
+    var interestHeading: some View {
+        HStack{
+            Text("Interests")
+                .font(.title)
+                .fontWeight(.bold)
+            Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width/3.3, height: 120)
+        .padding(.horizontal)
     }
     
     func tabSwitcher(proxy: ScrollViewProxy) -> some View {
         HStack {
-            ForEach(ActityCaseIters.allCases, id: \.self) { tab in
+            ForEach(ActivityCaseIters.allCases, id: \.self) { tab in
                 VStack {
-                    Text(tab.actitityTitle)
+                    Text(tab.activityTitle)
+                        .padding(5)
                         .font(.subheadline)
-                        .foregroundColor(selectedTab == tab ? .primary : .gray)
+                        .foregroundColor(selectedInterest == tab ? .primary : .gray)
                         .padding(7)
                         .background{
-                            if selectedTab == tab {
+                            if selectedInterest == tab {
                                 Capsule()
                                     .fill(Color.pink.opacity(0.2))
                                     .matchedGeometryEffect(id: "Capsule", in: activityAnimation)
@@ -100,16 +80,28 @@ extension ActivityView {
                 }
                 .onTapGesture {
                     withAnimation(.easeInOut) {
-                        selectedTab = tab
-                        proxy.scrollTo(tab.scrollID, anchor: .top)
+                        selectedInterest = tab
                     }
                 }
                 .frame(maxWidth: .infinity)
             }
         }
     }
+    
+    var profileStates: some View {
+        ScrollViewReader { proxy in
+            tabSwitcher(proxy: proxy)
+                .padding(.horizontal)
+                .padding(.top)
+            ScrollView(.vertical, showsIndicators: false) {
+                selectedInterest.activityContent()
+            }
+        }
+    }
+    
 }
 
 #Preview {
     ActivityView()
+        .environmentObject(HeaderViewManager())
 }

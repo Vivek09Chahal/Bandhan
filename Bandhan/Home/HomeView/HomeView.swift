@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @Environment(DataFetch.self) var dataFetch
+    @EnvironmentObject private var vm: HomeViewModel
     @State var showFilterSheet: Bool = false
     @State var showingSearchView: Bool = false
     
@@ -21,67 +21,99 @@ struct HomeView: View {
                         .padding(.horizontal)
                     Divider()
                     
-                    // MARK: - Filter View
-                    FilterView(showFilterSheet: $showFilterSheet)
-                        .padding(.horizontal)
+                    // MARK: - Filter Section
+                    filterButton
                     
                     // MARK: - Profile Scroll Section
                     VStack{
-                        if dataFetch.profiles.isEmpty {
-                            VStack(spacing: 16) {
-                                Image(systemName: "person.fill.questionmark")
-                                    .font(.system(size: 60))
-                                    .foregroundColor(.secondary)
-                                
-                                Text("Sorry it's not on you, It's on Us")
-                                    .font(.headline)
-                                
-                                Text("No matches found")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                    .padding(.top, 10)
+                        ScrollView {
+                            LazyVStack {
+                                allProfiles
                             }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .padding()
-                        } else {
-                            ScrollView {
-                                LazyVStack {
-                                    ForEach(dataFetch.profiles, id: \.id) { profile in
-                                        NavigationLink {
-                                            ProfileInfoView(profile: profile)
-                                        } label: {
-                                            ProfileCard(profile: profile)
-                                                .containerRelativeFrame(.vertical)
-                                                .id(profile.id)
-                                                .padding(.bottom)
-                                        }
-                                    }
-                                }
-                                .scrollTargetLayout()
-                            }
-                            .scrollTargetBehavior(.viewAligned)
-                            .scrollIndicators(.hidden)
-                            .padding()
+                            .scrollTargetLayout()
                         }
+                        .scrollTargetBehavior(.viewAligned)
+                        .scrollIndicators(.hidden)
+                        .padding()
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .sheet(isPresented: $showFilterSheet) {
-                FilterSheetView()
+                FilterOptionsView(filterViewModel: vm.filterViewModel)
             }
         }
     }
 }
 
-#Preview {
-    NavigationStack{
-        HomeView()
-            .environment({
-                let dataFetch = DataFetch()
-                // Load sample data for preview
-                dataFetch.profileDataLoad(jsonFileName: "ProfilesData")
-                return dataFetch
-            }())
+struct HomeView_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationStack{
+            HomeView()
+        }
+        .environmentObject(dev.profileVM)
+        .environmentObject(HeaderViewManager())
     }
+}
+
+extension HomeView{
+    
+    private var allProfiles: some View {
+        ForEach(vm.displayProfiles, id: \.id) { profile in
+            NavigationLink {
+                ProfileInfoView(profile: profile)
+            } label: {
+                ProfileCard(profile: profile)
+                    .containerRelativeFrame(.vertical)
+                    .id(profile.id)
+                    .padding(.bottom)
+            }
+        }
+    }
+    
+    var filterButton: some View {
+        HStack {
+            Button(action: {
+                showFilterSheet = true
+            }) {
+                HStack {
+                    Image(systemName: vm.filterViewModel.hasActiveFilters ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
+                        .foregroundColor(vm.filterViewModel.hasActiveFilters ? .blue : .gray)
+                    Text("Filter")
+                        .font(.footnote)
+                        .foregroundColor(vm.filterViewModel.hasActiveFilters ? .blue : .primary)
+                    
+                    if vm.filterViewModel.hasActiveFilters {
+                        Text("(\(vm.filterViewModel.appliedFilters.count))")
+                            .font(.caption)
+                            .foregroundColor(.blue)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(8)
+            }
+            
+            if vm.filterViewModel.hasActiveFilters {
+                Button("Clear All") {
+                    vm.filterViewModel.clearAllFilters()
+                }
+                .font(.footnote)
+                .foregroundColor(.red)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color.red.opacity(0.1))
+                .cornerRadius(8)
+            }
+            
+            Spacer()
+            
+            Text("\(vm.displayProfiles.count) profiles")
+                .font(.caption)
+                .foregroundColor(.gray)
+                .padding(.horizontal)
+        }
+    }
+    
 }

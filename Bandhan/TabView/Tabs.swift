@@ -46,12 +46,7 @@ struct Tabs: View {
                 
                 // MARK: - User Profile Menu
                 if tabManager.showUserProfile {
-                    UserProfileMenu(
-                        selectedMenu: $selectedMenu
-                    )
-                    .frame(width: 300)
-                    .transition(.move(edge: .leading))
-                    .zIndex(1)
+                    sideBar
                 }
             }
             // MARK: - Navigate to Menu Item
@@ -79,5 +74,17 @@ struct Tabs: View {
 
 #Preview {
     Tabs()
-        .environment(DataFetch())
+        .environmentObject(HomeViewModel())
+}
+
+extension Tabs {
+    
+    var sideBar: some View {
+        UserProfileMenu(
+            selectedMenu: $selectedMenu
+        )
+        .frame(width: 300)
+        .transition(.move(edge: .leading))
+        .zIndex(1)    }
+    
 }
