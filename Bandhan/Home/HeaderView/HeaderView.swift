@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HeaderView: View {
     
-    @EnvironmentObject var tabManager: HeaderViewManager
+    @EnvironmentObject var tabManager: ObjectManagers
     @State var isSearchBarActive: Bool = false
     
     var body: some View {
@@ -24,7 +24,7 @@ struct HeaderView: View {
 
 #Preview {
     HeaderView()
-        .environmentObject(HeaderViewManager())
+        .environmentObject(ObjectManagers())
 }
 
 extension HeaderView{

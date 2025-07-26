@@ -10,39 +10,39 @@ import SwiftUI
 struct ProfileCard: View {
     
     var profile: ProfilesData
+    @EnvironmentObject var homeVM: HomeViewModel
     
     var body: some View {
-        ZStack(){
-            
+        ZStack{
             // MARK: - Image
             ProfilePhotoView(width: 1.1, height: 1.7, pic: profile.profilePicture.first!)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(
-                ZStack {
-                    // Gradient overlay
-                    LinearGradient(
-                        colors: [.clear, .black],
-                        startPoint: .center,
-                        endPoint: .bottom
-                    )
-                    
-                    // Border stroke
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(
-                            LinearGradient(
-                                colors: [.red, .orange, .pink],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 2
+                .overlay(
+                    ZStack {
+                        // Gradient overlay
+                        LinearGradient(
+                            colors: [.clear, .black],
+                            startPoint: .center,
+                            endPoint: .bottom
                         )
-                }
-            )
+                        
+                        // Border stroke
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [.red, .orange, .pink],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 2
+                            )
+                    }
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             
             // MARK: - top Section
             VStack(alignment: .leading){
                 cardHeader
-                .foregroundStyle(.white)
+                    .foregroundStyle(.white)
                 
                 Spacer()
                 
@@ -76,8 +76,8 @@ extension ProfileCard {
             Group{
                 Image(systemName: "hand.thumbsup.fill")
                 Text("Most Compatible")
+                    .font(.caption)
             }
-            .font(.caption)
             .padding(10)
             .background{
                 RoundedRectangle(cornerRadius: 20)
@@ -98,5 +98,19 @@ extension ProfileCard {
             Text(info2)
         }
         .foregroundStyle(.white)
+    }
+}
+
+#Preview {
+    ProfileCard(profile: profilesPreview.instance.sampleProfile)
+        .environmentObject(ActivityViewModel())
+        .environmentObject(HomeViewModel())
+}
+
+struct TextShimmer: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .fill(Color.gray.opacity(0.9))
+            .frame(height: 24)
     }
 }

@@ -13,11 +13,13 @@ class HomeViewModel: ObservableObject {
     @Published var allProfiles: [ProfilesData] = []
     @Published var filteredProfiles: [ProfilesData] = []
     @Published var filterViewModel = FilterViewModel()
+    @Published var isLoading: Bool = false
     
     private var profileDataService = profileDataServices()
     private var cancellable = Set<AnyCancellable>()
     
     init(){
+        isLoading = true
         addSubscriber()
         setupFilterSubscriber()
     }
@@ -28,6 +30,10 @@ class HomeViewModel: ObservableObject {
             .sink { [weak self] returnedProfiles in
                 self?.allProfiles = returnedProfiles
                 self?.applyFilters()
+                // Only set isLoading to false when data is actually loaded
+                if !returnedProfiles.isEmpty {
+                    self?.isLoading = false
+                }
             }
             .store(in: &cancellable)
     }

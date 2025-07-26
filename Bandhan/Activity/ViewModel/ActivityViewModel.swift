@@ -7,13 +7,14 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 enum ActivityCaseIters: String, CaseIterable{
     case received, accepted, sent
     
     var activityTitle: String{
         switch self {
-            case .received:
+        case .received:
             return "Received"
         case .accepted:
             return "Accepted"
@@ -38,12 +39,12 @@ enum ActivityCases: String, CaseIterable{
     case profileVisit, shortlisted, contactViews
     
     @ViewBuilder
-    func navigateViewItem() -> some View {
+    func navigateViewItem(activityVM: ActivityViewModel) -> some View {
         switch self {
         case .profileVisit:
             activityNumbers(text: "Profile Visit", color: .indigo, number: 12)
         case .shortlisted:
-            activityNumbers(text: "Shortlisted", color: .yellow, number: 5)
+            activityNumbers(text: "Shortlisted", color: .yellow, number: activityVM.shortlistedProfilesID.count)
         case .contactViews:
             activityNumbers(text: "Contact Views", color: .blue, number: 8)
         }
@@ -53,53 +54,38 @@ enum ActivityCases: String, CaseIterable{
     func navigateView() -> some View {
         switch self {
         case .profileVisit:
-            activityNumbers(text: "Profile Visit", color: .indigo, number: 12)
+            ProfileVisitView()
         case .shortlisted:
-            VStack{
-                if Activities().shortlistProfiles.isEmpty{
-                    VStack{
-                        Text("No shortlisted profiles yet")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                } else {
-                    VStack{
-                        ForEach(Activities().shortlistProfiles, id: \.id){ profile in
-                            ProfileCard(profile: profile)
-                        }
-                    }
-                }
-            }
+            ShortlistedProfilesView()
         case .contactViews:
-            activityNumbers(text: "Contact Views", color: .blue, number: 8)
+            ContactViewsView()
         }
     }
 }
 
-
-
-class Activities {
+class ActivityViewModel: ObservableObject {
     
-    @EnvironmentObject var profileVM: HomeViewModel
+    var homeVM: HomeViewModel?
+    @Published var shortlistedProfilesID: [String] = []
     
-    var sceneProfiles: [ProfilesData] = []
-    var shortlistedProfilesID: [String] = []
-    var contactedProfiles: [ProfilesData] = []
-    
-    var shortlistProfiles: [ProfilesData] = []
-    
-    func getSortlistedProfiles() -> [ProfilesData]{
-        for profile in profileVM.allProfiles {
-            if shortlistedProfilesID.contains(profile.id) {
-                shortlistProfiles.append(profile)
-            }
-        }
-        
-        return shortlistProfiles
+    var shortlistedProfiles: [ProfilesData] {
+        guard let homeVM = homeVM else { return [] }
+        let profiles = homeVM.allProfiles.filter { shortlistedProfilesID.contains($0.id) }
+        return profiles
     }
     
+    func addToShortlist(_ profileID: String) {
+        if !shortlistedProfilesID.contains(profileID) {
+            shortlistedProfilesID.append(profileID)
+        }
+    }
+    
+    func removeFromShortlist(_ profileID: String) {
+        if let index = shortlistedProfilesID.firstIndex(of: profileID) {
+            shortlistedProfilesID.remove(at: index)
+        }
+    }
 }
-
 
 // MARK: - Need to seprate
 struct activityNumbers: View {
@@ -132,25 +118,5 @@ struct activityNumbers: View {
                 .shadow(radius: 2)
         }
         .frame(width: UIScreen.main.bounds.width/3.3, height: 120)
-    }
-}
-
-struct ReceivedView: View {
-    var body: some View {
-        Text("Received")
-    }
-}
-
-
-struct AcceptedView: View {
-    var body: some View {
-        Text("Accepted")
-    }
-}
-
-
-struct SentView: View {
-    var body: some View {
-        Text("Sent")
     }
 }

@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-class HeaderViewManager: ObservableObject {
+class ObjectManagers: ObservableObject {
     @Published var selectedTab: Int = 0
     @Published var showUserProfile: Bool = false
+    
+    @Published var toastManager: Bool = false
 }

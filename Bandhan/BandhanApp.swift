@@ -13,6 +13,8 @@ struct BandhanApp: App {
     
     @StateObject private var vm = HomeViewModel()
     @StateObject private var userVM = UserViewModel()
+    @StateObject private var activityVM = ActivityViewModel()
+    @StateObject private var objectVM = ObjectManagers()
     
 //    var sharedModelContainer: ModelContainer = {
 //        let schema = Schema([
@@ -29,10 +31,34 @@ struct BandhanApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Tabs()
-                .environmentObject(vm)
-                .environmentObject(userVM)
+            ZStack(alignment: .bottom){
+                Tabs()
+                    .environmentObject(vm)
+                    .environmentObject(userVM)
+                    .environmentObject(activityVM)
+                    .environmentObject(objectVM)
+                    .onAppear {
+                        activityVM.homeVM = vm
+                    }
+                
+                if objectVM.toastManager {
+                    toastView
+                        .offset(y: -70)
+                }
+            }
         }
-//        .modelContainer(sharedModelContainer)
+    }
+}
+
+extension BandhanApp {
+    var toastView : some View {
+        ToastView(message: "Profile ShortListed")
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+            .animation(.spring(response: 0.6, dampingFraction: 0.8), value: objectVM.toastManager)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    objectVM.toastManager = false
+                }
+            }
     }
 }

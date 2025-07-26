@@ -9,45 +9,62 @@ import SwiftUI
 
 struct ActionButton: View {
     
-    
     var id: String
-    var activitiesVM: Activities = Activities()
+    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var activityVM: ActivityViewModel
+    @EnvironmentObject var tabManager: ObjectManagers
     
     var body: some View {
-        HStack{
-            action(title: "Message", imageName: "envelope.badge.person.crop.fill", action: ())
-            action(title: "Interested", imageName: "bolt.heart", action: ())
-            action(title: "Shortlist", imageName: "star", action: activitiesVM.shortlistedProfilesID.append(id))
-            action(title: "Chat", imageName: "message", action: ())
+        NavigationStack{
+            HStack{
+                
+                action(title: "Interested", imageName: "bolt.heart", imgColor: .white)
+                Spacer()
+                action(title: isShortlisted ? "Shortlisted" : "Shortlist", imageName: isShortlisted ? "star.fill" : "star", imgColor: isShortlisted ? .yellow : .white)
+                    .onTapGesture {
+                        if isShortlisted {
+                            activityVM.removeFromShortlist(id)
+                        } else {
+                            activityVM.addToShortlist(id)
+                            tabManager.toastManager = true
+                        }
+                    }
+                Spacer()
+                action(title: "Chat", imageName: "message", imgColor: .white)
+                    .onTapGesture {
+                        tabManager.selectedTab = 2
+                    }
+            }
         }
     }
 }
 
 extension ActionButton {
     
-    func action(title: String, imageName: String, action: ()) -> some View {
-        Button {
-            action
-        } label: {
-            VStack{
-                HStack{
-                    Image(systemName: imageName)
-                        .frame(width: 30, height: 25)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background{
-                            Circle().fill(Color.red.opacity(0.5))
-                        }
-                }
-                Text(title)
-                    .font(.caption2)
+    private var isShortlisted: Bool {
+        activityVM.shortlistedProfilesID.contains(id)
+    }
+    
+    func action(title: String, imageName: String, imgColor: Color) -> some View {
+        VStack{
+            HStack{
+                Image(systemName: imageName)
+                    .frame(width: 30, height: 25)
+                    .foregroundColor(imgColor)
+                    .padding()
+                    .background{
+                        Circle().fill(Color.red.opacity(0.5))
+                    }
             }
-            .padding(.trailing)
-            .foregroundStyle(.white)
+            Text(title)
+                .font(.caption2)
         }
+        .padding(.trailing)
+        .foregroundStyle(.white)
     }
 }
-
 #Preview {
-    ActionButton(id: "1122")
+    ActionButton(id: "U1121")
+        .environmentObject(HomeViewModel())
+        .environmentObject(ActivityViewModel())
 }

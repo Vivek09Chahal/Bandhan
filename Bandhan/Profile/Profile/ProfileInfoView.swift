@@ -25,9 +25,9 @@ struct ProfileInfoView: View {
     }
 }
 
-//#Preview {
-//    ProfileInfoView(profile: dev.profileVM)
-//}
+#Preview {
+    ProfileInfoView(profile: profilesPreview.instance.sampleProfile)
+}
 
 extension ProfileInfoView {
     

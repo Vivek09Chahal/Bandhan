@@ -15,7 +15,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack{
-            ZStack(alignment: .leading){
+            ZStack(alignment: .bottom){
                 VStack{
                     HeaderView()
                         .padding(.horizontal)
@@ -38,6 +38,7 @@ struct HomeView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
             }
             .sheet(isPresented: $showFilterSheet) {
                 FilterOptionsView(filterViewModel: vm.filterViewModel)
@@ -52,21 +53,30 @@ struct HomeView_Preview: PreviewProvider {
             HomeView()
         }
         .environmentObject(dev.profileVM)
-        .environmentObject(HeaderViewManager())
+        .environmentObject(ObjectManagers())
+        .environmentObject(ActivityViewModel())
     }
 }
 
 extension HomeView{
     
     private var allProfiles: some View {
-        ForEach(vm.displayProfiles, id: \.id) { profile in
-            NavigationLink {
-                ProfileInfoView(profile: profile)
-            } label: {
-                ProfileCard(profile: profile)
+        Group {
+            if vm.isLoading {
+                ProfileCardShimmerView()
                     .containerRelativeFrame(.vertical)
-                    .id(profile.id)
                     .padding(.bottom)
+            } else {
+                ForEach(vm.displayProfiles, id: \.id) { profile in
+                    NavigationLink {
+                        ProfileInfoView(profile: profile)
+                    } label: {
+                        ProfileCard(profile: profile)
+                            .containerRelativeFrame(.vertical)
+                            .id(profile.id)
+                            .padding(.bottom)
+                    }
+                }
             }
         }
     }

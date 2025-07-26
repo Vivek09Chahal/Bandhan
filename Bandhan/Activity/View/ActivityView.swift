@@ -10,6 +10,8 @@ import SwiftUI
 struct ActivityView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var activityViewModel: ActivityViewModel
     @Namespace var activityAnimation
     @State private var selectedInterest: ActivityCaseIters = .received
     @State var activityCases: ActivityCases? = nil
@@ -28,8 +30,8 @@ struct ActivityView: View {
                 Spacer()
             }
             .background(Color(UIColor.systemGray6).opacity(0.4))
-            .navigationDestination(for: ActivityCases.self) { activityCase in
-                activityCase.navigateView()
+            .onAppear{
+                activityCases = nil
             }
         }
     }
@@ -40,9 +42,13 @@ extension ActivityView {
     var numberActivity: some View {
         HStack{
             ForEach(ActivityCases.allCases, id: \.self){ activityCase in
-                NavigationLink(value: activityCase) {
-                    activityCase.navigateViewItem()
-                }
+                NavigationLink(destination: {
+                    activityCase.navigateView()
+                        .environmentObject(homeViewModel)
+                        .environmentObject(activityViewModel)
+                }, label: {
+                    activityCase.navigateViewItem(activityVM: activityViewModel)
+                })
                 .foregroundStyle(.primary)
             }
         }
@@ -103,5 +109,7 @@ extension ActivityView {
 
 #Preview {
     ActivityView()
-        .environmentObject(HeaderViewManager())
+        .environmentObject(ObjectManagers())
+        .environmentObject(HomeViewModel())
+        .environmentObject(ActivityViewModel())
 }
